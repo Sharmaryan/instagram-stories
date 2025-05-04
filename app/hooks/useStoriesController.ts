@@ -18,27 +18,7 @@ export const useStoriesController = () => {
     }
   };
 
-  const nextImage = useCallback(() => {
-    if (!activeStory) return;
 
-    const storyImages = storiesMock[0][activeStory].images;
-    setCurrentImageIndex((prev) => {
-      if (prev >= storyImages.length - 1) {
-        const currentPersonIndex = peoples.indexOf(activeStory);
-        if (currentPersonIndex < peoples.length - 1) {
-          const nextPerson = peoples[currentPersonIndex + 1];
-          setStoryDirection("next");
-          setPreviousStory(activeStory);
-          setActiveStory(nextPerson);
-          return 0;
-        } else {
-          closeStory();
-          return 0;
-        }
-      }
-      return prev + 1;
-    });
-  }, [activeStory])
 
   const prevImage = useCallback(() => {
     if (!activeStory) return;
@@ -87,11 +67,33 @@ export const useStoriesController = () => {
     document.body.style.overflow = "hidden";
   };
 
-  const closeStory = () => {
+  const closeStory = useCallback(() => {
     setActiveStory(null);
     stopProgress();
     document.body.style.overflow = "auto";
-  };
+  }, [])
+
+  const nextImage = useCallback(() => {
+    if (!activeStory) return;
+
+    const storyImages = storiesMock[0][activeStory].images;
+    setCurrentImageIndex((prev) => {
+      if (prev >= storyImages.length - 1) {
+        const currentPersonIndex = peoples.indexOf(activeStory);
+        if (currentPersonIndex < peoples.length - 1) {
+          const nextPerson = peoples[currentPersonIndex + 1];
+          setStoryDirection("next");
+          setPreviousStory(activeStory);
+          setActiveStory(nextPerson);
+          return 0;
+        } else {
+          closeStory();
+          return 0;
+        }
+      }
+      return prev + 1;
+    });
+  }, [activeStory, closeStory])
 
   useEffect(() => {
     return () => stopProgress();

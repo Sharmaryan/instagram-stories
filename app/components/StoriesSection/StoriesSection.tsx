@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, act } from "react";
+import { useRef, useEffect } from "react";
 import { storiesMock } from "./StoriesSection.mock";
 import { Stories } from "../Stories/Stories";
 import { Direction } from "../Stories/Stories.types";
@@ -43,7 +43,7 @@ export const StoriesSection = () => {
   useEffect(() => {
     if (activeStory) startProgress();
     return stopProgress;
-  }, [activeStory, currentImageIndex]);
+  }, [activeStory, currentImageIndex, startProgress, stopProgress]);
 
   const scroll = (direction: Direction) => {
     if (!storiesContainerRef.current) return;
