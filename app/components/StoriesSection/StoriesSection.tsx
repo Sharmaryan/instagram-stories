@@ -1,14 +1,18 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, act } from "react";
 import { storiesMock } from "./StoriesSection.mock";
-import { Story } from "../Story/Story";
 import { Stories } from "../Stories/Stories";
 import { Direction } from "../Stories/Stories.types";
 import { useStoriesController } from "../../hooks/useStoriesController";
 import { useScrollArrows } from "../../hooks/useScrollArrows";
 import { useTouchNavigation } from "../../hooks/useTouchNavigation";
 import { useStoryKeyboardNavigation } from "../../hooks/useStoryKeyboardNavigation";
+import dynamic from "next/dynamic";
+const Story = dynamic(() => import("../Story/Story").then((mod) => mod.Story), {
+  ssr: false,
+  loading: () => <div className="fixed inset-0 bg-black" />,
+});
 
 export const peoples = Object.keys(storiesMock[0]);
 
@@ -23,7 +27,7 @@ export const StoriesSection = () => {
     prevImage,
     openStory,
     closeStory,
-    storyDirection
+    storyDirection,
   } = useStoriesController();
 
   const storiesContainerRef = useRef<HTMLDivElement>(null);
@@ -79,19 +83,23 @@ export const StoriesSection = () => {
         scroll={scroll}
       />
 
-      <Story
-        handleStoryClick={handleStoryClick}
-        handleTouchStart={handleTouchStart}
-        handleTouchMove={handleTouchMove}
-        handleTouchEnd={handleTouchEnd}
-        activeStory={activeStory}
-        currentImageIndex={currentImageIndex}
-        progress={progress}
-        closeStory={closeStory}
-        showLeftNavArrow={showLeftNavArrow}
-        showRightNavArrow={showRightNavArrow}
-        prevImage={prevImage}
-        nextImage={nextImage} storyDirection={storyDirection}      />
+      {activeStory && (
+        <Story
+          handleStoryClick={handleStoryClick}
+          handleTouchStart={handleTouchStart}
+          handleTouchMove={handleTouchMove}
+          handleTouchEnd={handleTouchEnd}
+          activeStory={activeStory}
+          currentImageIndex={currentImageIndex}
+          progress={progress}
+          closeStory={closeStory}
+          showLeftNavArrow={showLeftNavArrow}
+          showRightNavArrow={showRightNavArrow}
+          prevImage={prevImage}
+          nextImage={nextImage}
+          storyDirection={storyDirection}
+        />
+      )}
     </div>
   );
 };

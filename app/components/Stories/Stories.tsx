@@ -67,6 +67,8 @@ export const Stories = ({
                       alt={profile.alt}
                       fill
                       className="rounded-full object-cover"
+                      loading="eager"
+                      quality={80} 
                     />
                   )}
                 </div>

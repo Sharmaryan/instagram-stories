@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { storiesMock } from "../components/StoriesSection/StoriesSection.mock";
 
 export const peoples = Object.keys(storiesMock[0]);
@@ -18,7 +18,7 @@ export const useStoriesController = () => {
     }
   };
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (!activeStory) return;
 
     const storyImages = storiesMock[0][activeStory].images;
@@ -38,9 +38,9 @@ export const useStoriesController = () => {
       }
       return prev + 1;
     });
-  };
+  }, [activeStory])
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     if (!activeStory) return;
 
     setCurrentImageIndex((prev) => {
@@ -58,7 +58,7 @@ export const useStoriesController = () => {
       }
       return prev - 1;
     });
-  };
+  }, [activeStory])
 
 
   const startProgress = () => {
@@ -108,6 +108,6 @@ export const useStoriesController = () => {
     openStory,
     closeStory,
     storyDirection,
-    previousStory, 
+    previousStory,
   };
 };

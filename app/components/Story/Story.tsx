@@ -114,7 +114,7 @@ export const Story = ({
               src={storiesMock[0][activeStory].profile.src}
               alt={storiesMock[0][activeStory].profile.alt}
               data-testid="story-profile-image"
-              className="object-cover"
+              className="object-cover rounded-full"
               priority
               fill
             />

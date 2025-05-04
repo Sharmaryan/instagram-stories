@@ -11,7 +11,11 @@ export const ProgressBar = ({
       {activeStory && (
         <div className="flex gap-1 p-2 px-3">
           {storiesMock[0][activeStory].images.map((_, index) => (
-            <div key={index} className="h-1 flex-1 bg-gray-600 rounded-full" data-testid="story-progress-bar">
+            <div
+              key={index}
+              className="h-1 flex-1 bg-gray-600 rounded-full"
+              data-testid="story-progress-bar"
+            >
               <div
                 className={`h-full rounded-full ${
                   index < currentImageIndex
@@ -37,12 +41,9 @@ export const ProgressBar = ({
       )}
 
       <style jsx>{`
-        .hide-scrollbar {
-          -ms-overflow-style: none;
-          scrollbar-width: none;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-          display: none;
+        .progress-bar {
+          transition: width 100ms linear;
+          will-change: width;
         }
       `}</style>
     </>
