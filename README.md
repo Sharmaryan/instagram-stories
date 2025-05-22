@@ -1,36 +1,91 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Storygram - Instagram Stories Clone
 
-## Getting Started
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?logo=vercel)](https://instagram-stories-teal.vercel.app/)  
+*A performant Instagram Stories clone built with Next.js*
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 📱 Stories will change automatically every 5 seconds
+- 🖼️ Tapping left will switch the story to previous one & tapping on right will switch to the next story.
+- ↔️ Touch and keyboard navigation
+- ⚡ Performance-optimized components
+## 🛠 Setup & Installation
+
+### Prerequisites
+- Node.js ≥18.x
+- npm/yarn/pnpm
+
+### 1. Clone the repository
+```
+git clone https://github.com/Sharmaryan/instagram-stories.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+cd storygram
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 2. Install dependencies
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+npm install
+ or
+yarn install
+ or
+pnpm install
+```
 
-## Learn More
+### 3. Run the development server
 
-To learn more about Next.js, take a look at the following resources:
+```
+npm run dev
+ or
+yarn dev
+ or
+pnpm dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 4. Run tests
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+npm run test:e2e
+ or
+yarn test:e2e
+ or
+pnpm test:e2e
+```
 
-## Deploy on Vercel
+### 5. Run e2e tests in browser
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+npm run cypress
+ or
+yarn cypress
+ or
+pnpm cypress
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🏗️ Production Build
+
+```
+npm run build
+ or
+yarn build
+ or
+pnpm build
+```
+
+## 🛠 Tech Stack
+
+- Framework: Next.js (App Router)
+- Styling: Tailwind CSS
+- State Management: Custom Hooks
+- Testing: Cypress
+- Hosting: Vercel
+
+## 🧠 Design Decisions & Performance Optimization
+### Performance
+- Lazy loaded heavy components using next's dynamic()
+- Memoized functions using react's useCallback() hook
+- Optimized Image (eager loading, set quality,priority fetch,etc)
+### Design
+- Took the inspiration from instagram, made changes in color, background color and kept the design simple.
