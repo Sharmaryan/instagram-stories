@@ -23,7 +23,7 @@ export const Story = ({
     activeStory && (
       <div
         className={classNames(
-          "fixed inset-0 bg-black z-50 flex flex-col max-w-[375px]",
+          "fixed inset-0 bg-black z-50 flex flex-col",
           "transition-transform duration-300 ease-in-out",
           storyDirection ? "animate-zoom-in" : ""
         )}
