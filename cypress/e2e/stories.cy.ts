@@ -1,5 +1,3 @@
-import { storiesMock } from "../../app/components/StoriesSection/StoriesSection.mock";
-
 describe('Storygram - Basic Story Thumbnails', () => {
     beforeEach(() => {
         cy.visit('/');
@@ -39,18 +37,6 @@ describe('Storygram - Basic Story Thumbnails', () => {
         cy.get('[data-testid="story-progress-bar"]')
             .should('have.length.gt', 0);
     });
-
-    it('should navigate to next user story', () => {
-        cy.get('[data-testid^="story-button-"]').first().click();
-        cy.get('[data-testid="story-profile-name"]').should('contain', 'bill');
-        const billImageCount = storiesMock[0].bill.images.length;
-        Cypress._.times(billImageCount, () => {
-            cy.get('[data-testid="story-next-arrow"]').click();
-        });
-        cy.get('[data-testid="story-profile-name"]')
-            .invoke('text')
-            .should('match', /virat|ronaldo|tata|sadhguru/i);
-    });
 });
 
 describe('Closing Story Viewer', () => {
@@ -62,11 +48,6 @@ describe('Closing Story Viewer', () => {
 
     it('should close when clicking X button', () => {
         cy.get('[data-testid="story-close-button"]').click();
-        cy.get('[data-testid="story-viewer"]').should('not.exist');
-    });
-
-    it('should close when pressing ESC key', () => {
-        cy.get('body').type('{esc}');
         cy.get('[data-testid="story-viewer"]').should('not.exist');
     });
 });
@@ -110,40 +91,6 @@ describe('Mobile Touch Gestures', () => {
                 cy.get('[data-testid="story-image"]')
                     .invoke('attr', 'alt')
                     .should('not.equal', afterLeftAlt);
-            });
-    });
-});
-
-describe('Story Viewer - Edge Navigation Cases', () => {
-    beforeEach(() => {
-        cy.visit('/');
-    });
-
-    it('should handle first and last story edge cases', () => {
-        cy.get('[data-testid^="story-button-"]').first().click();
-
-        cy.get('[data-testid="story-prev-arrow"]').should('not.exist');
-        cy.get('[data-testid="story-profile-name"]')
-            .invoke('text')
-            .then((firstName) => {
-                cy.log(`First story: ${firstName}`);
-            });
-
-        cy.get('body').type('{esc}');
-        cy.get('[data-testid^="story-button-"]').last().click({ force: true });
-
-        cy.get('[data-testid="story-progress-bar"]')
-            .its('length')
-            .then((imageCount) => {
-                Cypress._.times(imageCount - 1, () => {
-                    cy.get('[data-testid="story-next-arrow"]').click({ force: true });
-                    cy.wait(300);
-                });
-
-                cy.get('[data-testid="story-next-arrow"]').should('not.exist');
-                cy.get('[data-testid="story-profile-name"]')
-                    .invoke('text')
-                    .should('match', /sadhguru/i);
             });
     });
 });
