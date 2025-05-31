@@ -1,6 +1,4 @@
 export interface StoryProps {
-    prevImage: () => void
-    nextImage: () => void
     closeStory: () => void
     handleTouchStart: (e: React.TouchEvent) => void
     handleTouchMove: (e: React.TouchEvent) => void
@@ -9,6 +7,4 @@ export interface StoryProps {
     activeStory: string | null
     currentImageIndex: number
     progress: number
-    showLeftNavArrow: boolean | string | null
-    showRightNavArrow: boolean | string | null
 }
