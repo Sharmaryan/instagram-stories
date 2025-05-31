@@ -7,7 +7,6 @@ import { Direction } from "../Stories/Stories.types";
 import { useStoriesController } from "../../hooks/useStoriesController";
 import { useScrollArrows } from "../../hooks/useScrollArrows";
 import { useTouchNavigation } from "../../hooks/useTouchNavigation";
-import { useStoryKeyboardNavigation } from "../../hooks/useStoryKeyboardNavigation";
 import dynamic from "next/dynamic";
 const Story = dynamic(() => import("../Story/Story").then((mod) => mod.Story), {
   ssr: false,
@@ -38,12 +37,10 @@ export const StoriesSection = () => {
   const { handleTouchStart, handleTouchMove, handleTouchEnd } =
     useTouchNavigation(nextImage, prevImage, startProgress, stopProgress);
 
-  useStoryKeyboardNavigation(activeStory, nextImage, prevImage, closeStory);
-
   useEffect(() => {
     if (activeStory) startProgress();
     return stopProgress;
-  }, [activeStory, currentImageIndex, startProgress, stopProgress]);
+  }, [activeStory, currentImageIndex]);
 
   const scroll = (direction: Direction) => {
     if (!storiesContainerRef.current) return;
@@ -63,13 +60,6 @@ export const StoriesSection = () => {
     else if (clickX > (2 * width) / 3) nextImage();
   };
 
-  const showLeftNavArrow =
-    activeStory && (currentImageIndex > 0 || peoples.indexOf(activeStory) > 0);
-
-  const showRightNavArrow =
-    activeStory &&
-    (currentImageIndex < storiesMock[0][activeStory].images.length - 1 ||
-      peoples.indexOf(activeStory) < peoples.length - 1);
 
   return (
     <div className="relative">
@@ -93,10 +83,6 @@ export const StoriesSection = () => {
           currentImageIndex={currentImageIndex}
           progress={progress}
           closeStory={closeStory}
-          showLeftNavArrow={showLeftNavArrow}
-          showRightNavArrow={showRightNavArrow}
-          prevImage={prevImage}
-          nextImage={nextImage}
           storyDirection={storyDirection}
         />
       )}
