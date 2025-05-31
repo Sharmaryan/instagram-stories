@@ -3,7 +3,6 @@ import { StoryProps } from "./Story.types";
 import { storiesMock } from "../StoriesSection/StoriesSection.mock";
 import { ProgressBar } from "../ProgressBar/ProgressBar";
 import classNames from "classnames";
-import ArrowButton from "../ArrowButton/ArrowButton";
 
 export const Story = ({
   handleStoryClick,
@@ -14,10 +13,6 @@ export const Story = ({
   currentImageIndex,
   progress,
   closeStory,
-  showLeftNavArrow,
-  showRightNavArrow,
-  prevImage,
-  nextImage,
   storyDirection,
 }: StoryProps & { storyDirection: "next" | "prev" | null }) => {
   const noMobileDevice =
@@ -65,30 +60,6 @@ export const Story = ({
         >
           ✕
         </button>
-        {showLeftNavArrow && (
-          <ArrowButton
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 text-white text-2xl bg-black bg-opacity-50 rounded-full p-2 cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (noMobileDevice) prevImage();
-            }}
-            variant="carousel"
-            data-testid="story-prev-arrow"
-          />
-        )}
-
-        {showRightNavArrow && (
-          <ArrowButton
-            direction="right"
-            className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 text-white text-2xl bg-black bg-opacity-50 rounded-full p-2 cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation();
-              if (noMobileDevice) nextImage();
-            }}
-            variant="carousel"
-            data-testid="story-next-arrow"
-          />
-        )}
 
         <div className="flex-1 relative overflow-hidden">
           <div key={activeStory} className="absolute inset-0">
