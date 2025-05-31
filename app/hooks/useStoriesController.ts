@@ -7,7 +7,6 @@ export const useStoriesController = () => {
   const [activeStory, setActiveStory] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [progress, setProgress] = useState(0);
-  const [previousStory, setPreviousStory] = useState<string | null>(null);
   const [storyDirection, setStoryDirection] = useState<"next" | "prev" | null>(null);
   const progressInterval = useRef<NodeJS.Timeout | null>(null);
 
@@ -29,7 +28,6 @@ export const useStoriesController = () => {
         if (currentPersonIndex > 0) {
           const prevPerson = peoples[currentPersonIndex - 1];
           setStoryDirection("prev");
-          setPreviousStory(activeStory);
           setActiveStory(prevPerson);
           const prevPersonImages = storiesMock[0][prevPerson].images;
           return prevPersonImages.length - 1;
@@ -83,7 +81,6 @@ export const useStoriesController = () => {
         if (currentPersonIndex < peoples.length - 1) {
           const nextPerson = peoples[currentPersonIndex + 1];
           setStoryDirection("next");
-          setPreviousStory(activeStory);
           setActiveStory(nextPerson);
           return 0;
         } else {
@@ -110,6 +107,5 @@ export const useStoriesController = () => {
     openStory,
     closeStory,
     storyDirection,
-    previousStory,
   };
 };
